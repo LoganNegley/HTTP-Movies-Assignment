@@ -11,13 +11,19 @@ const initialMovie = {
 
 function UpdateForm(props) {
     const [movie, setMovie]= useState(initialMovie)
-    const movieToUpdate = props.movieList.find(item => `${item.id}` === props.match.params.id)
-    console.log(movieToUpdate)
+    
 
 
     useEffect(() => {
-     setMovie(movieToUpdate)   
-    },[])
+    console.log(props.movieList)
+    const movieToUpdate = props.movieList.find(item => `${item.id}` === props.match.params.id)
+    console.log(movieToUpdate)
+    
+    if(movie){
+    setMovie(movieToUpdate) 
+    }
+   
+    },[props.movieList])
   
 //   handle changes function in form
 const handleChange = event => {
@@ -47,31 +53,31 @@ event.preventDefault(
               type='text'
               name='title'
               placeholder="Title"
-            //   onChange={}
+              onChange={handleChange}
             value={movie.title}
           />
             <input
               type='text'
               name='director'
               placeholder="Director"
-            //   onChange={}
+              onChange={handleChange}
             value={movie.director}
           />
             <input
               type='text'
               name='metascore'
               placeholder="Metascore"
-            //   onChange={}
+              onChange={handleChange}
             value={movie.metascore}
           />
             <input
               type='text'
               name='stars'
               placeholder="Actors"
-            //   onChange={}
+              onChange={handleChange}
             value={movie.stars}
           />
-          <button type='submit'>Submit</button>
+          <button type='submit'>Update</button>
       </form>
     </div>
   );
