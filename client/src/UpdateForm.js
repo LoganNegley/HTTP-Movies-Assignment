@@ -9,8 +9,14 @@ const initialMovie = {
     stars:[],
 };
 
-function UpdateForm() {
+function UpdateForm(props) {
     const [movie, setMovie]= useState(initialMovie)
+    const movieToUpdate = props.movieList.find(item => `${item.id}` === props.match.params.id)
+
+
+    // useEffect(() => {
+        
+    // },[])
   
 //   handle changes function in form
 const handleChange = event => {
@@ -25,8 +31,10 @@ const handleChange = event => {
     })
 };
 
-const handleSubmit = ()=>{
-
+const handleSubmit = event => {
+event.preventDefault(
+    // PUT request goes here
+)
 };
 
 
