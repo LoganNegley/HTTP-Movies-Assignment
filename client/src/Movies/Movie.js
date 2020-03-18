@@ -34,7 +34,7 @@ console.log(movie)
         Save
       </div>
       <Link to={`/update-movie/${movie.id}`}>
-        <button>Update</button>
+        <button className='update-button'>Update</button>
       </Link>
     </div>
   );
