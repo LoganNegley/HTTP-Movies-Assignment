@@ -12,11 +12,12 @@ const initialMovie = {
 function UpdateForm(props) {
     const [movie, setMovie]= useState(initialMovie)
     const movieToUpdate = props.movieList.find(item => `${item.id}` === props.match.params.id)
+    console.log(movieToUpdate)
 
 
-    // useEffect(() => {
-        
-    // },[])
+    useEffect(() => {
+     setMovie(movieToUpdate)   
+    },[])
   
 //   handle changes function in form
 const handleChange = event => {
