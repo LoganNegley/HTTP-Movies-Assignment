@@ -25,6 +25,20 @@ function Movie({ addToSavedList }) {
   if (!movie) {
     return <div>Loading movie information...</div>;
   }
+
+  const handleDelete = event => {
+    event.preventDefault();
+    axios.delete(`http://localhost:5000/api/movies/${movie.id}`)
+    .then(response => {
+    console.log(response)
+    alert(`You have deleted the movie`)
+    props.getMovieList(response.data)
+    props.history.push('/')
+    })
+    .catch(error => console.log(error, 'error deleting movie'))
+  }
+
+
 console.log(movie)
   return (
     <div className='save-wrapper'>
@@ -36,7 +50,7 @@ console.log(movie)
       <Link to={`/update-movie/${movie.id}`}>
         <button className='update-button'>Update</button>
       </Link>
-      <button>Delete Movie</button>
+      <button onClick={handleDelete}>Delete Movie</button>
     </div>
   );
 }
