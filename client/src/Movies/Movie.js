@@ -36,6 +36,7 @@ console.log(movie)
       <Link to={`/update-movie/${movie.id}`}>
         <button className='update-button'>Update</button>
       </Link>
+      <button>Delete Movie</button>
     </div>
   );
 }

@@ -19,18 +19,15 @@ function UpdateForm(props) {
     const movieToUpdate = props.movieList.find(item => `${item.id}` === props.match.params.id)
     console.log(movieToUpdate)
     
-    if(movie){
+    if(movieToUpdate){
     setMovie(movieToUpdate) 
     }
    
-    },[props.movieList])
+    },[props.movieList ])
   
 //   handle changes function in form
 const handleChange = event => {
     let value = event.target.value;
-    if(event.target.name === 'metascore'){
-        value = parseInt(value, 10);
-    }
 
     setMovie({
         ...movie,
@@ -39,16 +36,25 @@ const handleChange = event => {
 };
 
 const handleSubmit = event => {
-event.preventDefault(
+event.preventDefault()
     // PUT request goes here
-)
+    axios
+    .put(`http://localhost:5000/api/movies/${movie.id}`, movie)
+    .then(response => {
+      console.log(response)
+      props.history.push(`/movies/${movie.id}`)    
+      props.getMovieList(response.data)
+    })
+    .catch(error => console.log(error, 'there was an error with axios.put to server'))
+
+
 };
 
 
   return (
     <div className='updateForm'>
-      <h2>Update Movie Information</h2>
-      <form>
+      <h2>Update Information</h2>
+      <form onSubmit={handleSubmit}>
           <input
               type='text'
               name='title'
